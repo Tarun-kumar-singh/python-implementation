@@ -39,13 +39,33 @@ class BinaryTree:
 		self.create_tree2(new_node)
 		return
 
-	def	inorder_traversal(self):
+	def	inorder_traversal(self, parent):
+		if parent:
+			self.inorder_traversal(parent.left)
+			print(parent.data)
+			self.inorder_traversal(parent.right)
+		return
 
-	
 
+	def preorder_traversal(self,parent):
+		if parent:
+			print(parent.data)
+			self.preorder_traversal(parent.left)
+			self.preorder_traversal(parent.right)
+		return
+
+	def	postorder_traversal(self,parent):
+		if parent:
+			self.postorder_traversal(parent.left)
+			self.postorder_traversal(parent.right)
+			print(parent.data)
+		return
 
 b = BinaryTree()
 b.create_tree()
+b.inorder_traversal(b.root)
+b.preorder_traversal(b.root)
+b.postorder_traversal(b.root)
 
 
 		
