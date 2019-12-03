@@ -16,27 +16,27 @@ class BinaryTree:
 			return
 		new_node = Node(data)
 		self.root = new_node
-		self.create_tree2(new_node)
-		self.create_right(new_node)
+		self.create_lefttree(new_node)
+		self.create_righttree(new_node)
 
-	def	create_tree2(self,node):
+	def	create_lefttree(self,node):
 		data = int(input('Enter the left child of {0}'.format(node.data)))
 		if(data == -1):
 			return
 		new_node = Node(data)
-		self.create_tree2(new_node)
+		self.create_lefttree(new_node)
 		node.left = new_node
-		self.create_right(new_node)
+		self.create_righttree(new_node)
 		return
 
-	def create_right(self,node):
+	def create_righttree(self,node):
 		data = int(input('enter the right child of {0}'.format(node.data)))
 		if data == -1:
 			return
 		new_node = Node(data)
-		self.create_right(new_node)
+		self.create_righttree(new_node)
 		node.right = new_node
-		self.create_tree2(new_node)
+		self.create_lefttree(new_node)
 		return
 
 	def	inorder_traversal(self, parent):
@@ -61,12 +61,40 @@ class BinaryTree:
 			print(parent.data)
 		return
 
+	def count_no_of_nodes(self, node):
+		if(node):
+			return  (1 + self.count_no_of_nodes(node.left) + self.count_no_of_nodes(node.right))
+		else:
+			return  0
+
+	def count_no_leaves(self,node):
+		if(not node):
+			return
+		if(not node.left and not node.right):
+			return 1
+		else:
+			return ( self.count_no_leaves(node.left) + self.count_no_leaves(node.right))
+
+	def	no_of_full_nodes(self,node):
+		if not node:
+			return 0
+		if(not node.left and not node.right ):
+			return 0
+
+		return (1 if node.left and node.right else 0) + self.no_of_full_nodes(node.right) + self.no_of_full_nodes(node.left)
+
+	def height_of_tree(self):
+		
+
 b = BinaryTree()
 b.create_tree()
-b.inorder_traversal(b.root)
-b.preorder_traversal(b.root)
-b.postorder_traversal(b.root)
-
-
+# print('inorder traversal...............')
+# b.inorder_traversal(b.root)
+# print('preorser traversal.................')
+# b.preorder_traversal(b.root)
+# print('post order traversal...............')
+# b.postorder_traversal(b.root)
+# print(b.count_no_leaves(b.root))
+print(b.no_of_full_nodes(b.root))
 		
 
